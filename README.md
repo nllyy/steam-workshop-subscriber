@@ -1,6 +1,6 @@
-# Steam 创意工坊批量订阅提取器 (SteamCMD 格式)
+# Steam 创意工坊批量订阅提取器
 
-这是一个运行在浏览器控制台的 JavaScript 脚本，用于一键提取你在 Steam 创意工坊中订阅的所有 MOD/物品链接，并自动生成可用于 `steamcmd` 的批量下载脚本。
+这是一个运行在浏览器控制台的 JavaScript 脚本，用于一键提取你在 Steam 创意工坊中订阅的所有 MOD/物品链接，并自动生成批量订阅脚本。
 
 ## ⚠️ 免责声明
 
@@ -11,8 +11,6 @@
 - 无需安装任何环境，直接在浏览器控制台运行。
 - 自动解析当前页面的 APPID。
 - 后台静默抓取，无需手动翻页。
-- 自动生成包含 `login anonymous` 的标准 SteamCMD 批处理命令。
-- 输出纯数字 MOD ID，格式整洁。
 
 ## 适用平台
 - Windows 7 以上   (Windows 10 1809之前版本SteamCMD可能不稳定)
@@ -28,22 +26,16 @@
 1. 登录 [Steam 网页版](https://steamcommunity.com/)。
 2. 进入你的特定游戏订阅页面（例如：`https://steamcommunity.com/profiles/xxx/myworkshopfiles?appid=294100&browsefilter=mysubscriptions&p=1&numperpage=30`）。
 3. 按下 `F12` 打开浏览器开发者工具，点击 `Console`（控制台）标签。
-4. 将 `extractor.js` 中的代码粘贴到控制台中，并按回车运行。
+4. 将 `main.js` 中的代码粘贴到控制台中，并按回车运行。
 5. 脚本运行完毕后，浏览器会自动下载一个名为 `steamcmd_app_XXXXX.txt` 的文件。
-6. 将下载的 `.txt` 直接作为参数传给 SteamCMD，指令:`.\steamcmd.exe +runscript .\<your file name>`。
-7. 将该文件放入你的 SteamCMD 根目录，双击运行即可开始批量下载。
+6. 将下载的 `.txt` 里面的 `JS` 订阅脚本复制，发给其他人。
+7. 其他人想要订阅只需要打开一个任意创意工坊物品（[比如](https://steamcommunity.com/sharedfiles/filedetails/?id=1623423360)）然后在控制台运行订阅脚本。
 
-## 📄 输出示例
+## 如果是 `id` 列表
 
-下载得到的文本内容格式如下：
-
-```text
-login anonymous
-workshop_download_item 294100 1234567890
-workshop_download_item 294100 9876543210
-...
-```
-
+1. 如果已经有 `id` 列表了的话，可以先随便订阅几个 `mod`，然后运行一下 `main.js` 获得示例订阅脚本（下载的 `.txt`）
+2. 将示例订阅脚本里的数字`{ id: '某个数字', appId: '某个数字' }, ...`改成自己想要的就行。
+3. 可以发给`AI`来改，非常简单，后续还是需要打开一个任意创意工坊物品，然后在控制台运行订阅脚本。
 
 ## 相关项目
 [WorkshopDL-PS](https://github.com/lu-cent/WorkshopDL-PS)

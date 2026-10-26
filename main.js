@@ -59,11 +59,20 @@
         return;
     }
 
-    // 2. 按照 steamcmd 格式拼接文本
-    let outputText = "login anonymous\n";
+    // 2. JS 函数
+    let outputText = `(async function(items) {
+  for (const item of items) {
+    const { id, appId } = item;
+    SubscribeItem(id, appId);
+    console.log(\`已请求订阅: \${id} (appId: \${appId})\`);
+    await new Promise(resolve => setTimeout(resolve, 300));
+  }
+  console.log('批量请求发送完毕。');
+})([\n`;
     allModIds.forEach(modId => {
-        outputText += `workshop_download_item ${appid} ${modId}\n`;
+        outputText += `{ id: '${modId}', appId: '${appid}' },\n`;
     });
+    outputText += "]);"
 
     // 3. 生成并下载文件
     let blob = new Blob([outputText], {type: 'text/plain'});
